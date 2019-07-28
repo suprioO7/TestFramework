@@ -6,12 +6,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.crm.qa.base.TestBase;
-import com.crm.qa.pages.HomePage;
+
 import com.crm.qa.pages.LoginPage;
 
 public class LoginPageTest extends TestBase{
 	LoginPage loginPage;
-	HomePage homePage;
+	
 	
 	public LoginPageTest(){
 		super();
@@ -24,22 +24,28 @@ public class LoginPageTest extends TestBase{
 	}
 	
 	@Test(priority=1)
-	public void loginPageTitleTest(){
-		String title = loginPage.validateLoginPageTitle();
-		Assert.assertEquals(title, "#1 Free CRM for Any Business: Online Customer Relationship Software");
+	public void emailOrPhoneTest(){
+		Boolean title = loginPage.validateUsername();
+		Assert.assertTrue(title, "Email or Phone field is enabled");
 	}
 	
 	@Test(priority=2)
-	public void crmLogoImageTest(){
-		boolean flag = loginPage.validateCRMImage();
-		Assert.assertTrue(flag);
+	public void passwordFieldTest(){
+		Boolean pass = loginPage.validatePassword();
+		Assert.assertTrue(pass, "Password field is enabled");
 	}
 	
 	@Test(priority=3)
-	public void loginTest(){
-		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
+	public void signInButtonTest(){
+		Boolean loginBtn = loginPage.validateLoginButton();
+		Assert.assertTrue(loginBtn, "Login Button is enabled");
 	}
 	
+	@Test(priority=4)
+	public void languageSelect(){
+		 String lang=loginPage.selectlanguage();
+		Assert.assertEquals(lang, "English (UK)", "English is selected language");
+	}
 	
 	
 	@AfterMethod

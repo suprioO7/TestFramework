@@ -14,14 +14,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.crm.qa.util.TestUtil;
-import com.crm.qa.util.WebEventListener;
+
 
 public class TestBase {
 	
 	public static WebDriver driver;
 	public static Properties prop;
 	public  static EventFiringWebDriver e_driver;
-	public static WebEventListener eventListener;
+	
 	
 	public TestBase(){
 		try {
@@ -41,7 +41,7 @@ public class TestBase {
 		String browserName = prop.getProperty("browser");
 		
 		if(browserName.equals("chrome")){
-			System.setProperty("webdriver.chrome.driver", "/Users/naveenkhunteta/Downloads/chromedriver");	
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\suprio\\git\\PageObjectModel\\FacbookLogin\\src\\main\\java\\com\\crm\\qa\\util\\chromedriver");	
 			driver = new ChromeDriver(); 
 		}
 		else if(browserName.equals("FF")){
@@ -50,11 +50,7 @@ public class TestBase {
 		}
 		
 		
-		e_driver = new EventFiringWebDriver(driver);
-		// Now create object of EventListerHandler to register it with EventFiringWebDriver
-		eventListener = new WebEventListener();
-		e_driver.register(eventListener);
-		driver = e_driver;
+		
 		
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();

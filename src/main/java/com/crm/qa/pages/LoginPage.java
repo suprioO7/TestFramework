@@ -1,5 +1,7 @@
 package com.crm.qa.pages;
 
+import java.awt.Window;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,20 +12,26 @@ import com.crm.qa.base.TestBase;
 public class LoginPage extends TestBase{
 	
 	//Page Factory - OR:
-	@FindBy(name="username")
-	WebElement username;
+	@FindBy(xpath="//input[@type='email']")
+	WebElement Email_Phone;
 	
-	@FindBy(name="password")
+	@FindBy(xpath="//input[@type='password'][@id='pass']")
 	WebElement password;
 	
-	@FindBy(xpath="//input[@type='submit']")
-	WebElement loginBtn;
+	@FindBy(xpath="//a[@role='button'][@class='_42ft _4jy0 _517i _517h _51sy']")
+	WebElement languageBtn;
 	
-	@FindBy(xpath="//button[contains(text(),'Sign Up')]")
-	WebElement signUpBtn;
+	@FindBy(xpath="//input[@value='Log In']")
+	WebElement logInBtn;
 	
-	@FindBy(xpath="//img[contains(@class,'img-responsive')]")
-	WebElement crmLogo;
+	@FindBy(xpath="//a[@id='js_vp']")
+	WebElement english_US_language;
+	
+	@FindBy(xpath="//li[contains(text(), 'English (UK)')]")
+	WebElement main_page_english_US_language;
+
+	
+	
 	
 	//Initializing the Page Objects:
 	public LoginPage(){
@@ -31,22 +39,29 @@ public class LoginPage extends TestBase{
 	}
 	
 	//Actions:
-	public String validateLoginPageTitle(){
-		return driver.getTitle();
+	public String selectlanguage(){
+		
+		
+		JavascriptExecutor js= (JavascriptExecutor)driver;
+		js.executeScript("window.scrollBy(0, 250)");
+		languageBtn.click();
+		english_US_language.click();
+		return main_page_english_US_language.getText();
+		
+		
 	}
 	
-	public boolean validateCRMImage(){
-		return crmLogo.isDisplayed();
+	public boolean validateUsername(){
+		return Email_Phone.isEnabled();
 	}
 	
-	public HomePage login(String un, String pwd){
-		username.sendKeys(un);
-		password.sendKeys(pwd);
-		//loginBtn.click();
-		    	JavascriptExecutor js = (JavascriptExecutor)driver;
-		    	js.executeScript("arguments[0].click();", loginBtn);
-		    	
-		return new HomePage();
+	public boolean validatePassword(){
+		return password.isEnabled();
 	}
+	
+	public boolean validateLoginButton(){
+		return logInBtn.isEnabled();
+	}
+	
 	
 }
