@@ -2,9 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="facebook Login  Test Automation Test Suite">
 
+
 	<test name="facebook Login Test Cases">
+	
+	
 		<classes>
-			<class name="com.crm.qa.testcases.LoginPageTest"></class>
+			<class name="com.crm.qa.testcases.FlipkartProdSearchTest"></class>
 			
 		</classes>
 	</test>
